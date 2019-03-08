@@ -21,6 +21,10 @@
   - timedeltaそのものはあくまでも時間と時間の差なので、ナマで扱うのは使い勝手が良くない
   - 最初っからtimedeltaオブジェクトを生成するのではなく、datetime, dateオブジェクトなどをテキトーな日付で生成して計算を行い、%H, %Mなどでほしい属性にaccessすればOK
   - また、datetime.time型はdatetime型に変換しないと計算ができない
+- 条件分岐の際のイディオム的記法
+`print('YNeos'[<some condition>::2])`
 ## FE
-- 
+- 基数変換
+- 2の補数
+- シフト演算
 
