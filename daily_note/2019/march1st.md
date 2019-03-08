@@ -1,7 +1,9 @@
 # Done
 - paiza * 2
 - CheckIO * 1
-- LinuxコマンドでログデータからユニークユーザーIDをカウントする
+- FEの試験勉強
+- LinuxコマンドでログデータからユニークユーザーIDをカウント
+― Watson AssistantベースのBotのモニタリング・改善、他のBot用データの前処理
 
 # Learn
 ## Linux
@@ -19,4 +21,6 @@
   - timedeltaそのものはあくまでも時間と時間の差なので、ナマで扱うのは使い勝手が良くない
   - 最初っからtimedeltaオブジェクトを生成するのではなく、datetime, dateオブジェクトなどをテキトーな日付で生成して計算を行い、%H, %Mなどでほしい属性にaccessすればOK
   - また、datetime.time型はdatetime型に変換しないと計算ができない
+## FE
+- 
 
