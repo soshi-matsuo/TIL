@@ -2,8 +2,8 @@
 - paiza * 2
 - CheckIO * 1
 - FEの試験勉強
-- LinuxコマンドでログデータからユニークユーザーIDをカウント
-― Watson AssistantベースのBotのモニタリング・改善、他のBot用データの前処理
+- LinuxコマンドでログデータからユニークユーザーIDをカウント  
+- Watson AssistantベースのBotのモニタリング・改善、他のBot用データの前処理
 
 # Learn
 ## Linux
