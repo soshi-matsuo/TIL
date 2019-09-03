@@ -17,6 +17,7 @@
 **HandsOn:** MIDIのNotesに合わせて適当なグラフィックを描画するプログラムを作る
 - MIDIのサウンドなど、GUIコンポーネント以外もEventSourceとして扱える
 - MIDIのメッセージとイベントを作成してControllerEventにリスナーを登録し、ControllerEventの発生に応じてグラフィック描画を行う  
+  
 - SwingによるGUIの大まかな流れ
   - JFrameのcontent, size, visible等を初期化
   - JButton、JLabelなどのGUI Componentを定義
