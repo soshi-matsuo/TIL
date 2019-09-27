@@ -25,7 +25,7 @@ Collectionについて
   - ex. `List<Dog> dogs = new ArrayList<Dog>();`と、ArrayListを初期化して変数に代入する際はList型の変数を宣言して代入する
 - ジェネリクスを利用するCollectionクラスとして、ArrayListのAPIドキュメントが好例
   - `<E>`はそのCollectionが保持して返す要素の型を抽象的に表している
-  - Doc中の`<E>`部分が、初期化する際に与える実際の型に置換されると考えてOK。型引数を初期化時に与えることでそのCollectionの`add(<E> o)`が`add(<MyClass> o)`に更新されるので、宣言した型を持つ要素以外を与えることができなくなる
+  - Doc中の`<E>`部分が、初期化する際に与える実際の型に置換されると考えてOK。型引数を初期化時に与えることでそのCollectionの`add(<E> o)`が`add(<MyClass> o)`に更新されるので、**宣言した型を持つ要素以外を与えることができなくなる**
 - メソッドの定義にもジェネリクスが使われることがある
   - クラス宣言時に使われた型引数を、そのままメソッドの引数の型引数として使える
   - そのメソッドが引数に受け取るCollectionが保持すべき要素の型を、シグネチャ内にジェネリクスを書くことで定義できる
@@ -79,3 +79,20 @@ Setについて
   
 Mapについて
 - Mapオブジェクトを標準出力にプリントすると、{key=value}という形式で出力される  
+  
+    
+ジェネリクス詳細＆ワイルドカード  
+- 引数にArrayList<Animal>を取るメソッドに対して、ArrayList<Dog>のようなコレクションを渡そうとすると、コンパイルエラーが生じる（AnimalのSubClassがDog）
+  - これは **引数に渡されるコレクションの型安全性を守るため**
+    - このようなメソッドでは引数に受け取ったコレクションに要素を追加する操作が生じうる。また、ArrayList<Animal>を引数に想定したメソッドなので、あらゆるAnimalのSubClassを追加することが考えられる。しかし、そのような操作が起こりうるメソッドでArrayList<Dog>を受け取ることを許してしまうと、「Dogしか要素に持たないコレクションに対してCat型の要素が混入してしまう」問題が生じる
+  - SuperClass配列を受け取るよう定義されたメソッドに対して、SubClass配列を引数に渡した場合にコンパイルエラーが出ないのは、配列の要素の型はコンパイル＆ランタイムの2回検査されるから
+    - コレクションの場合はランタイムでの型検査は行われないので、コンパイル時の要素の型安全性の要求が厳しい
+- 後述の通り、変数を初期化する際も同じで、**宣言した変数のジェネリクスの型と、実際に代入するコレクションのジェネリクスの型は全く同じである必要がある** 
+  
+- `public void sample1(ArrayList<MyClass> list)`のシグネチャでは、上記の理由でMyClassのSubClassを要素に持つArrayListを引数に渡すことは出来ない
+- これを解決するためのオプションが**ジェネリクスのワイルドカード**
+  - `public void sample2(ArrayList<? extends MyClass> list)`と定義することで、MyClassを継承or実装するSubClassを要素に持つArrayListも引数に渡せるようになる
+  - `public ArrayList<T extends MyClass> void sample3(ArrayList<T> list)`も同じ意味になる。複数のCollectionを引数に渡す際はこちらのほうが書く量が減る
+  - この記法を使うと、コンパイラは、SubClassを要素に持つCollectionを受け取ることを許す代わりに、そのCollectionに要素を追加することを禁止する→実行時の型安全性が保たれる
+- **ジェネリクスの型引数は、ワイルドカードを使わない限り、宣言した通りの型しか受け入れない**
+  - `List<Animal> list = new ArrayList<Animal>();`（ArrayListをListとして宣言）は可能だが、`ArrayList<Animal> animals = new ArrayList<Dog>();`（ArrayList<Dog>をArrayList<Animal>として宣言）は不可能
