@@ -24,7 +24,7 @@
     - POJO（Plain Old Java Object）として設定ファイルの内容を保持するための独立したクラスを用意して、`@Configuration`、`@ConfigurationProperties`を併用することで、設定値を保持するクラスをDIに登録する  
       - `@Configuration`アノテーションは、表記はよく似ていてるが、コレ自体は`@Bean`定義用のメソッドを内包できるように`@Component`アノテーション（クラスをBeanとしてDIに登録するためのアノテーション）を拡張したものでしかない  
     - `@EnableConfigurationProperties`と併用することで、よりシンプルにDI登録できる  
-      - 実際に外部設定値を活用するクラスに`@EnableConfigurationProperties`を付けて引数に`@ConfigurationProperties`付きクラスを渡すと、`@ConfigurationProperties`クラスで読み込んだ外部設定値を`@Enable~`クラス側で簡単に呼び出せる（参考：https://www.baeldung.com/spring-enable-config-properties）  
+      - 実際に外部設定値を活用するクラスに`@EnableConfigurationProperties`を付けて引数に`@ConfigurationProperties`付きクラスを渡すと、`@ConfigurationProperties`クラスで読み込んだ外部設定値を`@Enable~`クラス側で簡単に呼び出せる（参考：https://www.baeldung.com/spring-enable-config-properties ）  
 - jarファイル実行時のコマンドライン引数として渡す
 - 環境変数を設定してjarファイルを実行する
 - `RandomValuePropertySource`による設定値のランダム化
@@ -35,7 +35,7 @@
   - ポピュラーな参照実装としてHibernate Validatorがある
   - エラー文を書く際にExpression Languageが併用される事が多い
 - フィールドにアノテーションを付けた後は、Validatorインスタンスの`validator()`にBeanを渡すことで検証を行い、エラーメッセージのSetを返り値として取得する
-- **JavaBeansは必ずしもSpring Beansと同じではない**（参考：https://stackoverflow.com/questions/21866571/difference-between-javabean-and-spring-bean）
+- **JavaBeansは必ずしもSpring Beansと同じではない**（参考：https://stackoverflow.com/questions/21866571/difference-between-javabean-and-spring-bean ）
   - Spring以外の文脈でBeanという言葉が使われていた場合、単に以下の性質を持つクラスを指す
     - `public`な引数なしのコンストラクタを持つ（デフォルトコンストラクタの存在）
     - Getter, Setterを使ってプロパティへのアクセスを行う（カプセル化）
