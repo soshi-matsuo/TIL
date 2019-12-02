@@ -28,7 +28,9 @@ RFC6749で定義されている。
 8. クライアントアプリは、アクセストークンが有効な間、エンドユーザーの代わりにリソースサーバの該当データに繰り返しアクセスできる  
   
 上記は簡略化したもので、実際はアクセストークン発行までのフローは認可サーバが担い、リソースサーバはアクセストークンを元にデータを提供するだけ  
-参考：https://qiita.com/TakahikoKawasaki/items/200951e5b5929f840a1f  
+参考  
+- https://qiita.com/TakahikoKawasaki/items/200951e5b5929f840a1f  
+- https://tools.ietf.org/html/rfc6749
   
 ## OpenID Connect  
 ### 概要
@@ -46,7 +48,9 @@ OAuth2.0を拡張する形で定められた仕様で、OAuth2.0がアクセス�
 OpenID ConnectはOAuth2.0と酷似したプロセスが定められているため、**OpenID ConnectにおけるOpenIDプロバイダはOAuth2.0における認可サーバを兼ねることが大半**。  
 つまりクライアントアプリは、アクセストークンとIDトークンを同時に要求することが可能。
   
-参考：https://qiita.com/TakahikoKawasaki/items/4ee9b55db9f7ef352b47  
+参考  
+- https://qiita.com/TakahikoKawasaki/items/4ee9b55db9f7ef352b47  
+- http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html  
 
 ### IDトークン
 サービス間ID連携のために利用されている概念（またはデータ構造）。  
