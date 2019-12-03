@@ -64,7 +64,7 @@ OpenID ConnectはOAuth2.0と酷似したプロセスが定められているた�
   - OpenID Connectでは受付可能な値として`id_token`, `none`が追加され、`code`, `token`, `id_token`の任意の組み合わせを受け付けるように変更された
 - IDトークン発行のリクエストは`scope`に`openid`を含む必要がある
   - `scope`パラメータを使うことで、IDトークンのclaimに含める属性情報を追加することも出来る  
-    - profile, email, address, phoneなどは標準で要求可能になっている
+    - `profile`, `email`, `address`, `phone`などは標準で要求可能になっている
 - `response_type`が`code`で`scope`に`openid`が含まれるパターンが多い
   - 認可エンドポイントから認可コードが発行されるまではOAuth2.0と同じだが、そのコードを使ってトークンエンドポイントにリクエストを送ると、アクセストークンに加えてIDトークンが返される
   - `scope`による指定がない場合は単にアクセストークンが返される  
