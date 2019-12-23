@@ -21,10 +21,9 @@
     - モック：ハリボテのオブジェクト。テスト対象クラスが別のクラスに依存していてテストしにくいときに、依存クラスの振る舞いを真似ることでテスト実施を助ける
     - `mock()`または`@Mock`でそのオブジェクトを完全にモックするか、`spy()`または`@Spy`で一部メソッドだけをモックする
     - `when(mockObj.someMethod(someParam)).thenReturn(someValue)`と書くことでモックの振る舞い＝オブジェクトのメソッドが呼ばれた時の返り値を固定でき、テストが簡単になる
-    - `private`メソッドはMockitoのみではモック出来ないが、PowerMockを併用すればモック可能になる
     - `@MockBeans`：`@Autowired`とモックを併用するためのSpring側の機能。 **フィールドにこのアノテーションを付けると、テスト実行時にSpring Contextに登録されている同じ型のBeanを勝手にモックで置換してくれる。** 
   - PowerMock：Mockitoに機能を加えたライブラリ
-    - Mockitoでは不可能な、`private`メソッドのモックが可能
+    - `private`メソッドはMockitoのみではモック出来ないが、PowerMockを併用すればモック可能になる
     - 注意点
       - https://www.gwtcenter.com/difference-between-doreturn-and-when
       - Mockitoと併用する際の同名`static`メソッドの呼び出し方
