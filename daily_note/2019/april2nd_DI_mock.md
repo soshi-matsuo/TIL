@@ -19,8 +19,15 @@
     - リッスン：通信機能を持つソフトが、外部からのアクセスに備えて待機すること
   - Mockito：モックオブジェクトを扱うためのライブラリ。
     - モック：ハリボテのオブジェクト。テスト対象クラスが別のクラスに依存していてテストしにくいときに、依存クラスの振る舞いを真似ることでテスト実施を助ける
+    - `mock()`または`@Mock`でそのオブジェクトを完全にモックするか、`spy()`または`@Spy`で一部メソッドだけをモックする
     - `when(mockObj.someMethod(someParam)).thenReturn(someValue)`と書くことでモックの振る舞い＝オブジェクトのメソッドが呼ばれた時の返り値を固定でき、テストが簡単になる
+    - `private`メソッドはMockitoのみではモック出来ないが、PowerMockを併用すればモック可能になる
     - `@MockBeans`：`@Autowired`とモックを併用するためのSpring側の機能。 **フィールドにこのアノテーションを付けると、テスト実行時にSpring Contextに登録されている同じ型のBeanを勝手にモックで置換してくれる。** 
+  - PowerMock：Mockitoに機能を加えたライブラリ
+    - Mockitoでは不可能な、`private`メソッドのモックが可能
+    - 注意点
+      - https://www.gwtcenter.com/difference-between-doreturn-and-when
+      - Mockitoと併用する際の同名`static`メソッドの呼び出し方
   
 - Stream：**Javaの入出力処理を司る、データをバイト単位またはテキスト単位で読み書きする機構。** 入力を担うInputStreamクラスと出力を担うOutputStreamクラスが根本の抽象クラスとして存在し、実際の処理は目的に応じた具象クラスが行なう
   - 標準入出力、ファイルへの入出力、WebAPIへの入出力など、あらゆる入出力（データのやり取り？）を抽象化するためのもの。Javaプログラムへのすべての入力はInputStreamを通じて行われ、逆も同じ。
