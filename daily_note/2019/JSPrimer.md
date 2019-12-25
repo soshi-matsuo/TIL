@@ -318,8 +318,8 @@
   - エラーファーストコールバックの発展型の、ES6以降に導入されたBIO
 - `Promise`を使った非同期処理の流れ
   - `Promise`インスタンスを返す関数を実装
-    - `Promise`のコンストラクタは、引数に`executor`と呼ばれる実際に非同期処理を行うCB関数を受け取る
-      - **`executor`には、`resolve`, `reject`（CB関数を表す仮引数）を受け取り、「非同期処理が成功した場合には`resolve()`を呼び、失敗した場合には`reject()`を呼ぶ」という実装を行う必要がある**
+    - `Promise`のコンストラクタは、`executor`（実際に非同期処理を行うCB関数）を受け取る
+      - **`executor`には、「CB関数として`resolve`, `reject`を受け取り、非同期処理が成功した場合には`resolve()`を呼び、失敗した場合には`reject()`を呼ぶ」という実装を行う必要がある**
   - `Promise`インスタンスの`then()` メソッドを呼び出し、**`executor`内で`resolve`, `reject`として扱われるCB関数を実際に登録する**
     - `then()`の引数はそれぞれ`onFulfilled`、`onRejected`と呼ばれ、それぞれ成功時・失敗時に呼ばれるCB関数を表す
     - **`executor`（`Promise`のコンストラクタに渡したCB関数）の中で`resolve`に渡した引数は`onFulfilled`に渡され、`reject`に渡した引数は`onRejected`に渡される**
