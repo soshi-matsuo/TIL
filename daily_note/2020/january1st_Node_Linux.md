@@ -28,7 +28,8 @@ package.json：Node.jsのプロジェクトを管理するためにnpmが生成�
     - `^`：バージョン指定へのprefixとして使うと、Minor, Patchのバージョンアップを許容するように設定できる
     
 ### Express
-Express：Webアプリ、REST APIを作成するためのフレームワーク。以下機能概略。  
+Express：Webアプリ、REST APIを作成するためのフレームワーク。  
+`express-generator`を使うとExpressを利用したアプリの骨組みを一気に構築できる。以下はExpressの基本機能概略。  
 - サーバ起動：`const app = express(); app.listen(port)`で指定したポート番号でサーバをリクエスト受付状態にする  
   
 - ルーティング：何らかの処理と、クライアントがアクセスするパスとを紐付けるための仕組み  
