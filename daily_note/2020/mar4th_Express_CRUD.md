@@ -56,3 +56,28 @@ POSTでリソースの更新や削除を行うことも可能だが、PUTやDELE
 - `session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true })`  
 - `passport.initialize()`  
 - `passport.session()`  
+  
+実際にPassportでセッション管理を行うには、以下のシリアライズ、デシリアライズの手順が必要。  
+- 参考：https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize  
+- `passport.serializeUser(cb(userInfo, done))`  
+  - passportでの認証が成功した際に一度だけ呼ばれ、そのUserの情報をシリアライズする  
+    - 慣例的には、UserIDのみがシリアライズ対象とされる  
+  - CB内の`done(null, userInfo)`の呼び出しによって、シリアライズされたUser情報はセッションデータとしてサーバに保持される  
+    - 具体的には`req.session.passport.user`に保持される  
+- `passport.deserializeUser(cb(userInfo, done))`  
+  - 認証成功後のリクエストのたびに呼ばれる  
+  - cookie内のセッションIDからセッションデータを特定し、そこに保持されたシリアライズ済みのUser情報を、cbのuserInfoに引数として渡す  
+  - cb内では以下の処理が走る  
+    - userInfoを使ってDB等からUserオブジェクトを検索＆取得  
+    - `done(null, userObj)`の呼び出しによって、取得したUserオブジェクトをそのリクエストの`req.user`に格納  
+  
+上記2つのメソッドによって、リクエストを扱う際に`req.user`を検証すれば認証済みか否かがわかる。  
+- 認証済みでなければセッションデータにシリアライズ済みUser情報が入っていないので、`deserializeUser`によって`req.user`にUserオブジェクトが格納されることもない  
+- 実際に各ページで認証の有無を検証するには、`req.isAuthenticated()`（passportを初期化すると自動で実装される？）を使ってミドルウェアを作成し、ルーティングに登録するのが慣例  
+  
+具体的にユーザー認証を実装するには、PassportのStrategyオブジェクトを活用する。StrategyではGoogleやGithubのソーシャル認証など様々な認証フローを選択可能。  
+  
+以下`LocalStrategy`(アプリ内でDB等のデータソースを使って認証)での例  
+- `passport.use(new LocalStrategy())`のようにして認証手法を定義する  
+- LocalStrategyでid, password認証を行う場合は、`new LocalStrategy(cb(username, password, done))`を`passport.use`に渡して、cb内で具体的な認証手順を実装する  
+- リクエストに対してStrategyで設定した認証を実際に行うには、ログイン用のPOSTエンドポイントのルーティング関数に、引数として`passport.use('local', { failureRedirect: '/' })`を渡してミドルウェア登録をすればOK  
