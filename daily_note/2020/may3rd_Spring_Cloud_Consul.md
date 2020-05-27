@@ -18,6 +18,11 @@ Configuration Serverの設定値の更新を、Spring Cloudアプリを動かし
 - このアノテーションを使わずにBeanを更新するには、`/restart`にアクセスしてDIコンテナを再起動する必要がある
 ## Spring Cloud Consul
 Spring bootアプリへのConsul導入を補助するSpring Cloud配下のライブラリ。部署ではConsulのdistributed configuration(すべてのサービスインスタンスに同一の設定を供給する)機能を利用している。  
+### Consul
+一言でいうと、複数のサーバをオーケストレーションするWebシステムメンテナンスツールで、クラウドネイティブなアプリの実現に貢献する。  
+- オーケストレーション：複雑なシステム/ミドルウェア/サービスの、配備/設定/管理の自動化を指す用語（by Wikipedia）   
+- 部署では、k8sでデプロイされた（=複数のサーバにまたがった？）アプリケーションに共通の設定を提供するConfiguration Serverとして利用されている。  
+  - Consul上で設定値の更新があれば、連携しているアプリケーションにRefresh Eventを発行して更新を促すことができる。    
 ### distributed configurationの導入
 #### Spring boot側の設定
 - maven/gradleでspring-cloud-starter-consul-all/configを依存関係に追加  
