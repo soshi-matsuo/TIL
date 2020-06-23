@@ -25,5 +25,13 @@ UIでどのJobどうしが依存しているのか、どこで問題が発生し
 **jobs**：実際にパイプライン上で何をするのかを指定する要素。一連のstepで構成され、各jobは冪等かつ疎結合になる。  
 
 ### CLI
-
+Concourseは`fly`コマンドを介してCLIで操作を行う。  
+- `fly -t <target> login -n <team> -c <concourse-url>`で、指定したConcourseサーバとteamを`target`として登録しながら認証できる。  
+  - targetごとにflyのバージョンが指定されており、外れている場合は`fly -t <target> sync`でCLIのバージョンを同期する必要がある。  
+  - fly login詳細：https://concourse-ci.org/fly.html#fly-login  
+- `fly -t <target> pipelines`でログイン中のteam配下のpipelineを一覧。  
+- `fly -t <target> get-pipeline(gp) -p <pipeline>`で特定のpipelineの詳細を閲覧。  
+- `fly -t <target> set-pipeline(sp) -c <local_yaml_file> -p <pipeline>`でpipelineの作成/更新。  
+- `fly -t <target> pause-pipeline/unpause-pipeline -p <pipeline>`でpipelineの停止/開始。  
+- `fly -t <target> destroy-pipeline -p <pipeline>`でpipelineの削除。  
 
