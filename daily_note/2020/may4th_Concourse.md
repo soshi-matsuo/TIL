@@ -154,6 +154,28 @@ Concourseは`fly`コマンドを介してCLIで操作を行う。
   - 純粋なGoで書かれており、Docker CLIやDocker daemonを含まない  
   - ビルドは、tarファイルを生成するoci-buildのようなTaskで行われる  
   - registry-image：https://github.com/concourse/registry-image-resource  
-
+#### oci-build-taskについて
+- Open Container Initiative(OCI)準拠なImageをビルドするためのConcourse Taskを表すDocker Image  
+  - OCI：コンテナ技術の実装の業界標準策定を目的に提出された発議で、ランタイムとイメージの2つについて標準仕様を策定している  
+- 「Resource同様に再利用可能なTaskを実装しよう」という提案のPoCのために作られたもので、仕様が固まれば必要な設定も変わりうるらしい
+  - 例えば、現状は`privileged: true`に設定しないとビルドは失敗する  
+- oci-build-taskの`config`の書き方  
+  - `image_resource`: `type: registry-image`、`source.repository: vito/oci-build-task`を指定する  
+  - `params`: build実行のコンテナで利用できる任意の環境変数で、主に以下が使われる  
+    - `CONTEXT`: デフォは`.`で、ビルドコンテキストに使われるディレクトリのパスを表す  
+    - `DOCKERFILE`: Dockerfileのパス  
+    - `BUILD_ARG_<VAR>`: 接頭辞BUILD_ARG_を持つ環境変数はbuild argに使われる  
+    - `UNPACK_ROOTFS`: これをtrueにすると、ビルドしたImageのファイルシステムが実際に展開される（後続Task stepでそのまま利用できる）  
+  - `inputs`: Taskを実行するために必要な入力なので、基本的に`CONTEXT`の値と同じになる  
+  - `outputs`: 基本的に`name: image`に設定される  
+    - 実際に生成されるimageディレクトリの中には以下が含まれる  
+      - `image.tar`: OCI imageのtarball（圧縮済みtarファイル）で、registry-image Resourceを通して外部Registryにアップロード可能  
+      - `digest`: OCI Image configurationのダイジェスト  
+    - paramsで`UNPACK_ROOTFS`を設定していると以下のファイル/ディレクトリも作成される  
+      - `rootfs/*`: そのImageのファイルシステムが展開されたもの  
+      - `metadata.json`: そのImageの環境/ユーザ設定を記述したJSONファイル  
+  - `caches`: `path: cache`に設定することでビルドTaskにキャッシュを利用できる  
+  - `run`: `path: build`と設定することで、このTaskからImageのビルドを実行できる  
+- 公式：https://github.com/vito/oci-build-task  
 
 
