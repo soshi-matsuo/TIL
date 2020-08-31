@@ -48,3 +48,5 @@ Protocol Buffersは、シリアライズ用のスキーマ定義を行うため�
 - スキーマ言語としてのProtobuf： https://qiita.com/yugui/items/160737021d25d761b353  
 - gRPC公式（Introduction）： https://grpc.io/docs/what-is-grpc/introduction/  
 - gRPC公式（Lifecycle）： https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle  
+
+Nodeでの実装レベルについては、8月3週目のBoxを参照
